@@ -42,11 +42,16 @@ prepare() {
   cd ${_srcname}
 
   # Checkout our relevant kernel version
-  git checkout v${pkgver}
+  git checkout v${pkgver}-zen1
 
   # Apply Arch upstream patches 
   echo "Applying Arch upstream patches ..."
   for i in ../../patches/${_kernelver}/*.patch; do patch -p1 < $i; done
+
+  echo "Patching Surface device patches..."
+  cd ../${_patchsrcname}
+  for i in ../../patches/linux-surface/*.patch; do patch -p1 < $i; done
+  cd ../${_srcname}
 
   # Apply Surface device patches
   echo "Applying Surface device patches ..."
