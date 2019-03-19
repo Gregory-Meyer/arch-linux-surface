@@ -16,7 +16,7 @@ license=('GPL2')
 makedepends=('xmlto' 'kmod' 'inetutils' 'bc' 'libelf')
 options=('!strip')
 source=(
-  git://git.kernel.org/pub/scm/linux/kernel/git/stable/linux-stable.git
+  git://github.com/zen-kernel/zen-kernel.git
   git://github.com/jakeday/linux-surface.git
   .config        # kernel configuration file
   60-linux.hook  # pacman hook for depmod
@@ -35,7 +35,7 @@ sha256sums=('SKIP'
             'ad6344badc91ad0630caacde83f7f9b97276f80d26a20619a87952be65492c65')
 
 # Source directory names for kernel and patches
-_srcname=linux-stable
+_srcname=zen-kernel
 _patchsrcname=linux-surface
 
 prepare() {

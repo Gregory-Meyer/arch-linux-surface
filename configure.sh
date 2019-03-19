@@ -5,7 +5,7 @@
 # User did not enter a major version selection, prompt for one
 if [ "$1" = "" ]; then
   echo "Which kernel version do you want to build?"
-  select major_version in "4.19" "5.0"; do
+  select major_version in "5.0"; do
     break;
   done
 else
@@ -14,11 +14,8 @@ fi
 
 # Convert major version (e.g. 4.14) to full version (e.g. 4.14.40)
 case $major_version in
-  "4.19")
-    version="4.19.27"
-    ;;
   "5.0")
-    version="5.0.1"
+    version="5.0.3-zen1"
     ;;
   *)
     echo "Invalid selection!"
@@ -30,14 +27,14 @@ esac
 
 cache_folder=.cache
 build_folder=build-${version}
-kernel_repository=git://git.kernel.org/pub/scm/linux/kernel/git/stable/linux-stable.git
-kernel_src_folder=linux-stable
+kernel_repository=git://github.com/zen-kernel/zen-kernel.git
+kernel_src_folder=zen-kernel
 patches_repository=git://github.com/jakeday/linux-surface.git
 patches_src_folder=linux-surface
 
-kernel_suffix="-surface"
+kernel_suffix="-zen-surface"
 if [ "$major_version" = "4.14" ]; then
-  kernel_suffix="-surface-lts"
+  kernel_suffix="-zen-surface-lts"
 fi
 
 ############################### CACHE UPDATES ############################### 
