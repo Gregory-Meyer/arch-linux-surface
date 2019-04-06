@@ -15,7 +15,7 @@ fi
 # Convert major version (e.g. 4.14) to full version (e.g. 4.14.40)
 case $major_version in
   "5.0")
-    version="5.0.3"
+    version="5.0.5"
     ;;
   *)
     echo "Invalid selection!"
@@ -33,9 +33,6 @@ patches_repository=git://github.com/jakeday/linux-surface.git
 patches_src_folder=linux-surface
 
 kernel_suffix="-zen-surface"
-if [ "$major_version" = "4.14" ]; then
-  kernel_suffix="-zen-surface-lts"
-fi
 
 ############################### CACHE UPDATES ############################### 
 
