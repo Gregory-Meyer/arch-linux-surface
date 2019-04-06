@@ -1,0 +1,46 @@
+diff --git a/patches/5.0/0002-suspend.patch b/patches/5.0/0002-suspend.patch
+index 0ae6a7f55..758026f17 100644
+--- a/patches/5.0/0002-suspend.patch
++++ b/patches/5.0/0002-suspend.patch
+@@ -1,17 +1,3 @@
+-From 437250c8a711f50c98e5bbc0df8a49b60b3c0a25 Mon Sep 17 00:00:00 2001
+-From: Jake Day <jake@ninebysix.com>
+-Date: Wed, 13 Mar 2019 15:15:20 -0400
+-Subject: [PATCH 02/11] suspend
+-
+----
+- drivers/nvme/host/nvme.h |  5 +++++
+- drivers/nvme/host/pci.c  | 10 +++++++++-
+- drivers/pci/quirks.c     |  4 ++++
+- include/linux/pci_ids.h  |  2 ++
+- kernel/power/suspend.c   | 11 +++++++++++
+- kernel/sysctl.c          |  9 +++++++++
+- 6 files changed, 40 insertions(+), 1 deletion(-)
+-
+ diff --git a/drivers/nvme/host/nvme.h b/drivers/nvme/host/nvme.h
+ index c4a1bb41abf0..5537c35ab677 100644
+ --- a/drivers/nvme/host/nvme.h
+@@ -120,10 +106,10 @@ index 0bd595a0b610..a8385e8894a5 100644
+  	pm_notifier_call_chain(PM_POST_SUSPEND);
+  	pm_restore_console();
+ diff --git a/kernel/sysctl.c b/kernel/sysctl.c
+-index ba4d9e85feb8..540387f3dccf 100644
++index a3ed701aa395..d94d1ba73f37 100644
+ --- a/kernel/sysctl.c
+ +++ b/kernel/sysctl.c
+-@@ -312,7 +312,16 @@ static int min_extfrag_threshold;
++@@ -323,7 +323,16 @@ static int min_extfrag_threshold;
+  static int max_extfrag_threshold = 1000;
+  #endif
+  
+@@ -137,9 +123,6 @@ index ba4d9e85feb8..540387f3dccf 100644
+ +		.mode		= 0644,
+ +		.proc_handler	= proc_dointvec,
+ +	},
++ #ifndef CONFIG_SCHED_MUQSS
+  	{
+  		.procname	= "sched_child_runs_first",
+- 		.data		= &sysctl_sched_child_runs_first,
+--- 
+-2.19.1
+-

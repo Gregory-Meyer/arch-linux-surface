@@ -1,0 +1,44 @@
+diff --git a/patches/5.0/0004-cameras.patch b/patches/5.0/0004-cameras.patch
+index db6fba767..093290a47 100644
+--- a/patches/5.0/0004-cameras.patch
++++ b/patches/5.0/0004-cameras.patch
+@@ -1,30 +1,8 @@
+-From 7ad2c2a1732dfd2b90cb9aa769858ceb5bc57f0b Mon Sep 17 00:00:00 2001
+-From: Jake Day <jake@ninebysix.com>
+-Date: Wed, 13 Mar 2019 15:16:08 -0400
+-Subject: [PATCH 04/11] cameras
+-
+----
+- drivers/media/usb/uvc/uvc_driver.c |   40 +
+- drivers/staging/Makefile           |    1 +
+- drivers/staging/ov5693/Kconfig     |   10 +
+- drivers/staging/ov5693/Makefile    |    5 +
+- drivers/staging/ov5693/ad5823.c    |  218 +++++
+- drivers/staging/ov5693/ad5823.h    |   90 ++
+- drivers/staging/ov5693/ov5693.c    | 1461 ++++++++++++++++++++++++++++
+- drivers/staging/ov5693/ov5693.h    |  848 ++++++++++++++++
+- 8 files changed, 2673 insertions(+)
+- create mode 100644 drivers/staging/ov5693/Kconfig
+- create mode 100644 drivers/staging/ov5693/Makefile
+- create mode 100644 drivers/staging/ov5693/ad5823.c
+- create mode 100644 drivers/staging/ov5693/ad5823.h
+- create mode 100644 drivers/staging/ov5693/ov5693.c
+- create mode 100644 drivers/staging/ov5693/ov5693.h
+-
+ diff --git a/drivers/media/usb/uvc/uvc_driver.c b/drivers/media/usb/uvc/uvc_driver.c
+-index b62cbd800111..6461ed3af344 100644
++index 33a22c016456..ce0a47362b2f 100644
+ --- a/drivers/media/usb/uvc/uvc_driver.c
+ +++ b/drivers/media/usb/uvc/uvc_driver.c
+-@@ -2391,6 +2391,46 @@ static const struct uvc_device_info uvc_quirk_force_y8 = {
++@@ -2399,6 +2399,46 @@ static const struct uvc_device_info uvc_quirk_force_y8 = {
+   * though they are compliant.
+   */
+  static const struct usb_device_id uvc_ids[] = {
+@@ -2748,6 +2726,3 @@ index 000000000000..79aef69666e8
+ +	.q_focus_abs = ad5823_q_focus_abs,
+ +};
+ +#endif
+--- 
+-2.19.1
+-
