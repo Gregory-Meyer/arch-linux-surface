@@ -1,4 +1,5 @@
 # Maintainer: David Hacker <dmhacker@protonmail.com>
+# Maintainer: Gregory Meyer <gregjmum@gmail.com>
 # Contributor: Tobias Powalowski <tpowa@archlinux.org>
 # Contributor: Thomas Baechler <thomas@archlinux.org>
 
@@ -11,13 +12,13 @@ pkgver={2}
 pkgbase=linux${_kernelname}
 pkgrel=1
 arch=('x86_64')
-url="https://github.com/dmhacker/arch-linux-surface"
+url="https://github.com/Gregory-Meyer/arch-linux-surface"
 license=('GPL2')
 makedepends=('xmlto' 'kmod' 'inetutils' 'bc' 'libelf')
 options=('!strip')
 source=(
   git://github.com/zen-kernel/zen-kernel.git
-  git://github.com/jakeday/linux-surface.git
+  git://github.com/Gregory-Meyer/linux-surface.git
   .config        # kernel configuration file
   60-linux.hook  # pacman hook for depmod
   90-linux.hook  # pacman hook for initramfs regeneration
@@ -47,11 +48,6 @@ prepare() {
   # Apply Arch upstream patches 
   echo "Applying Arch upstream patches ..."
   for i in ../../patches/${_kernelver}/*.patch; do patch -p1 < $i; done
-
-  echo "Patching Surface device patches..."
-  cd ../${_patchsrcname}
-  for i in ../../patches/linux-surface/*.patch; do patch -p1 < $i; done
-  cd ../${_srcname}
 
   # Apply Surface device patches
   echo "Applying Surface device patches ..."

@@ -29,7 +29,7 @@ cache_folder=.cache
 build_folder=build-${version}
 kernel_repository=git://github.com/zen-kernel/zen-kernel.git
 kernel_src_folder=zen-kernel
-patches_repository=git://github.com/jakeday/linux-surface.git
+patches_repository=git://github.com/Gregory-Meyer/linux-surface.git
 patches_src_folder=linux-surface
 
 kernel_suffix="-zen-surface"
