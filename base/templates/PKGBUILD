@@ -1,4 +1,5 @@
 # Maintainer: David Hacker <dmhacker@protonmail.com>
+# Maintainer: Gregory Meyer <gregjmum@gmail.com>
 # Contributor: Tobias Powalowski <tpowa@archlinux.org>
 # Contributor: Thomas Baechler <thomas@archlinux.org>
 
@@ -11,13 +12,13 @@ pkgver={2}
 pkgbase=linux${_kernelname}
 pkgrel=1
 arch=('x86_64')
-url="https://github.com/dmhacker/arch-linux-surface"
+url="https://github.com/Gregory-Meyer/arch-linux-surface"
 license=('GPL2')
 makedepends=('xmlto' 'kmod' 'inetutils' 'bc' 'libelf')
 options=('!strip')
 source=(
-  git://git.kernel.org/pub/scm/linux/kernel/git/stable/linux-stable.git
-  git://github.com/jakeday/linux-surface.git
+  git://github.com/zen-kernel/zen-kernel.git
+  git://github.com/Gregory-Meyer/linux-surface.git
   .config        # kernel configuration file
   60-linux.hook  # pacman hook for depmod
   90-linux.hook  # pacman hook for initramfs regeneration
@@ -35,14 +36,14 @@ sha256sums=('SKIP'
             'ad6344badc91ad0630caacde83f7f9b97276f80d26a20619a87952be65492c65')
 
 # Source directory names for kernel and patches
-_srcname=linux-stable
+_srcname=zen-kernel
 _patchsrcname=linux-surface
 
 prepare() {
   cd ${_srcname}
 
   # Checkout our relevant kernel version
-  git checkout v${pkgver}
+  git checkout v${pkgver}-zen1
 
   # Apply Arch upstream patches 
   echo "Applying Arch upstream patches ..."

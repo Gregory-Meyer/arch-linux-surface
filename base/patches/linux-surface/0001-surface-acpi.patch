@@ -1,0 +1,68 @@
+diff --git a/patches/5.0/0001-surface-acpi.patch b/patches/5.0/0001-surface-acpi.patch
+index 12e8be87e..796838751 100644
+--- a/patches/5.0/0001-surface-acpi.patch
++++ b/patches/5.0/0001-surface-acpi.patch
+@@ -1,18 +1,3 @@
+-From a7077570b66e06f433f56256431c071e1944d632 Mon Sep 17 00:00:00 2001
+-From: Jake Day <jake@ninebysix.com>
+-Date: Wed, 13 Mar 2019 14:49:26 -0400
+-Subject: [PATCH 01/11] surface-acpi
+-
+----
+- drivers/acpi/acpica/dsopcode.c      |    2 +-
+- drivers/acpi/acpica/exfield.c       |   12 +-
+- drivers/platform/x86/Kconfig        |   56 +
+- drivers/platform/x86/Makefile       |    1 +
+- drivers/platform/x86/surface_acpi.c | 2731 +++++++++++++++++++++++++++
+- drivers/tty/serdev/core.c           |   90 +-
+- 6 files changed, 2886 insertions(+), 6 deletions(-)
+- create mode 100644 drivers/platform/x86/surface_acpi.c
+-
+ diff --git a/drivers/acpi/acpica/dsopcode.c b/drivers/acpi/acpica/dsopcode.c
+ index 78f9de260d5f..0cd858520f5b 100644
+ --- a/drivers/acpi/acpica/dsopcode.c
+@@ -59,12 +44,12 @@ index e5798f15793a..55abd9e035a0 100644
+  		buffer_desc = acpi_ut_create_buffer_object(buffer_length);
+  		if (!buffer_desc) {
+ diff --git a/drivers/platform/x86/Kconfig b/drivers/platform/x86/Kconfig
+-index b5e9db85e881..e57a27dd2ead 100644
++index 8b52ec11ba69..137bb89b0e94 100644
+ --- a/drivers/platform/x86/Kconfig
+ +++ b/drivers/platform/x86/Kconfig
+-@@ -622,6 +622,62 @@ config THINKPAD_ACPI_HOTKEY_POLL
+- 	  If you are not sure, say Y here.  The driver enables polling only if
+- 	  it is strictly necessary to do so.
++@@ -640,6 +640,62 @@ config TP_SMAPI
++ 
++ 	  If you have a Lenovo/IBM ThinkPad laptop, say Y or M here.
+  
+ +config SURFACE_ACPI
+ +	depends on ACPI
+@@ -126,7 +111,7 @@ index b5e9db85e881..e57a27dd2ead 100644
+  	tristate "Thinkpad Hard Drive Active Protection System (hdaps)"
+  	depends on INPUT
+ diff --git a/drivers/platform/x86/Makefile b/drivers/platform/x86/Makefile
+-index ce8da260c223..8412fe7a169d 100644
++index d04437cec595..85107b1db744 100644
+ --- a/drivers/platform/x86/Makefile
+ +++ b/drivers/platform/x86/Makefile
+ @@ -39,6 +39,7 @@ obj-$(CONFIG_TC1100_WMI)	+= tc1100-wmi.o
+@@ -134,9 +119,9 @@ index ce8da260c223..8412fe7a169d 100644
+  obj-$(CONFIG_IDEAPAD_LAPTOP)	+= ideapad-laptop.o
+  obj-$(CONFIG_THINKPAD_ACPI)	+= thinkpad_acpi.o
+ +obj-$(CONFIG_SURFACE_ACPI)	+= surface_acpi.o
++ obj-$(CONFIG_THINKPAD_EC)	+= thinkpad_ec.o
++ obj-$(CONFIG_TP_SMAPI)		+= tp_smapi.o
+  obj-$(CONFIG_SENSORS_HDAPS)	+= hdaps.o
+- obj-$(CONFIG_FUJITSU_LAPTOP)	+= fujitsu-laptop.o
+- obj-$(CONFIG_FUJITSU_TABLET)	+= fujitsu-tablet.o
+ diff --git a/drivers/platform/x86/surface_acpi.c b/drivers/platform/x86/surface_acpi.c
+ new file mode 100644
+ index 000000000000..b2d0f4f19647
+@@ -2996,6 +2981,3 @@ index a0ac16ee6575..0dd242ff24d1 100644
+  	if (!ctrl->serdev)
+  		return -ENODEV;
+  
+--- 
+-2.19.1
+-
