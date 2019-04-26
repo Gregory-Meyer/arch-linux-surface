@@ -4,7 +4,7 @@ echo "This script was created to simplify the setup process for Surface devices 
 echo 
 
 cache_folder=.cache
-patches_repository=git://github.com/jakeday/linux-surface.git
+patches_repository=git://github.com/Gregory-Meyer/linux-surface.git
 patches_src_folder=linux-surface
 firmware_src_folder="$cache_folder/$patches_src_folder/firmware"
 
